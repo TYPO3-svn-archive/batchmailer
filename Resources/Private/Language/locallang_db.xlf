@@ -7,6 +7,12 @@
 			<trans-unit id="tx_batchmailer_domain_model_mail">
 				<source>Mail</source>
 			</trans-unit>
+			<trans-unit id="tx_batchmailer_domain_model_mail.tab_mail">
+				<source>Mail</source>
+			</trans-unit>
+			<trans-unit id="tx_batchmailer_domain_model_mail.tab_sent">
+				<source>Sending information</source>
+			</trans-unit>
 			<trans-unit id="tx_batchmailer_domain_model_mail.crdate">
 				<source>Creation Date</source>
 			</trans-unit>
@@ -30,6 +36,18 @@
 			</trans-unit>
 			<trans-unit id="tx_batchmailer_domain_model_mail.mail">
 				<source>Mail Object</source>
+			</trans-unit>
+			<trans-unit id="tx_batchmailer_domain_model_mail.sent">
+				<source>Sent?</source>
+			</trans-unit>
+			<trans-unit id="tx_batchmailer_domain_model_mail.sent_status">
+				<source>Status</source>
+			</trans-unit>
+			<trans-unit id="tx_batchmailer_domain_model_mail.sent_error_message">
+				<source>Error message</source>
+			</trans-unit>
+			<trans-unit id="tx_batchmailer_domain_model_mail.sent_date">
+				<source>Sent on</source>
 			</trans-unit>
 
 		</body>

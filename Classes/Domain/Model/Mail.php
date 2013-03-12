@@ -93,6 +93,38 @@ class Tx_Batchmailer_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractE
 	protected $mailObject;
 
 	/**
+	 * TRUE if the mail has been sent
+	 *
+	 * @var boolean
+	 */
+	protected $sent;
+
+	/**
+	 * Result status of the mail (OK = 6, error = 3)
+	 *
+	 * NOTE: the values correspond to \TYPO3\CMS\Core\Log\LogLevel::INFO and \TYPO3\CMS\Core\Log\LogLevel::ERROR
+	 * respectively, taken from TYPO3 CMS 6.0
+	 *
+	 * @var integer
+	 */
+	protected $sentStatus;
+
+	/**
+	 * Error message, if sending the mail failed
+	 *
+	 * @var string
+	 */
+	protected $sentErrorMessage;
+
+	/**
+	 * Date at which the mail was sent
+	 *
+	 * @var DateTime
+	 * @validate DateTime
+	 */
+	protected $sentDate;
+
+	/**
 	 * Returns the recipients
 	 *
 	 * @return string $recipients
@@ -244,6 +276,82 @@ class Tx_Batchmailer_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractE
 	public function setMailObject($mailObject) {
 		$this->mailObject = $mailObject;
 		$this->mail = serialize($mailObject);
+	}
+
+	/**
+	 * Returns the sent flag
+	 *
+	 * @return boolean
+	 */
+	public function getSent() {
+		return $this->sent;
+	}
+
+	/**
+	 * Sets the sent flag
+	 *
+	 * @param boolean $sent
+	 * @return void
+	 */
+	public function setSent($sent) {
+		$this->sent = $sent;
+	}
+
+	/**
+	 * Returns the sent status
+	 *
+	 * @return boolean
+	 */
+	public function getSentStatus() {
+		return $this->sentStatus;
+	}
+
+	/**
+	 * Sets the sent status (OK = 6, error = 3)
+	 *
+	 * @param integer $sentStatus
+	 * @return void
+	 */
+	public function setSentStatus($sentStatus) {
+		$this->sentStatus = $sentStatus;
+	}
+
+	/**
+	 * Returns the error message
+	 *
+	 * @return boolean
+	 */
+	public function getSentErrorMessage() {
+		return $this->sentErrorMessage;
+	}
+
+	/**
+	 * Sets the error message
+	 *
+	 * @param string $sentErrorMessage
+	 * @return void
+	 */
+	public function setSentErrorMessage($sentErrorMessage) {
+		$this->sentErrorMessage = $sentErrorMessage;
+	}
+
+	/**
+	 * Returns the sent date
+	 *
+	 * @return boolean
+	 */
+	public function getSentDate() {
+		return $this->sentDate;
+	}
+
+	/**
+	 * Sets the sent date
+	 *
+	 * @param DateTime $sentDate
+	 * @return void
+	 */
+	public function setSentDate(DateTime $sentDate) {
+		$this->sentDate = $sentDate;
 	}
 
 }

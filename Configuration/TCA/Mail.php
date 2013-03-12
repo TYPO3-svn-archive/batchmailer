@@ -9,10 +9,7 @@ $TCA['tx_batchmailer_domain_model_mail'] = array(
 		'showRecordFieldList' => 'hidden, recipients, copies, blind_copies, sender, subject, body',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'crdate, hidden, recipients, copies, blind_copies, sender, subject, body'),
-	),
-	'palettes' => array(
-		'1' => array('showitem' => ''),
+		'1' => array('showitem' => '--div--;LLL:EXT:batchmailer/Resources/Private/Language/locallang_db.xlf:tx_batchmailer_domain_model_mail.tab_mail, crdate, hidden, recipients, copies, blind_copies, sender, subject, body, --div--;LLL:EXT:batchmailer/Resources/Private/Language/locallang_db.xlf:tx_batchmailer_domain_model_mail.tab_sent, sent, sent_status, sent_error_message, sent_date'),
 	),
 	'columns' => array(
 		'crdate' => array(
@@ -88,7 +85,6 @@ $TCA['tx_batchmailer_domain_model_mail'] = array(
 				'type' => 'text',
 				'cols' => 40,
 				'rows' => 15,
-				'eval' => 'trim',
 				'readOnly' => TRUE
 			),
 		),
@@ -98,7 +94,46 @@ $TCA['tx_batchmailer_domain_model_mail'] = array(
 			'config' => array(
 				'type' => 'none'
 			)
-		)
+		),
+		'sent' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:batchmailer/Resources/Private/Language/locallang_db.xlf:tx_batchmailer_domain_model_mail.sent',
+			'config' => array(
+				'type' => 'check',
+				'readOnly' => TRUE
+			),
+		),
+		'sent_status' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:batchmailer/Resources/Private/Language/locallang_db.xlf:tx_batchmailer_domain_model_mail.sent_status',
+			'displayCond' => 'FIELD:sent:REQ:true',
+			'config' => array(
+				'type' => 'input',
+				'eval' => 'int',
+				'readOnly' => TRUE
+			),
+		),
+		'sent_error_message' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:batchmailer/Resources/Private/Language/locallang_db.xlf:tx_batchmailer_domain_model_mail.sent_error_message',
+			'displayCond' => 'FIELD:sent:REQ:true',
+			'config' => array(
+				'type' => 'text',
+				'cols' => 40,
+				'rows' => 5,
+				'readOnly' => TRUE
+			),
+		),
+		'sent_date' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:batchmailer/Resources/Private/Language/locallang_db.xlf:tx_batchmailer_domain_model_mail.sent_date',
+			'displayCond' => 'FIELD:sent:REQ:true',
+			'config' => array(
+				'type' => 'input',
+				'eval' => 'datetime',
+				'readOnly' => TRUE
+			),
+		),
 	),
 );
 
