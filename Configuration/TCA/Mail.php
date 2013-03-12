@@ -17,7 +17,7 @@ $TCA['tx_batchmailer_domain_model_mail'] = array(
 	'columns' => array(
 		'crdate' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:lang/locallang_general.xlf:tx_batchmailer_domain_model_mail.crdate',
+			'label' => 'LLL:EXT:batchmailer/Resources/Private/Language/locallang_db.xlf:tx_batchmailer_domain_model_mail.crdate',
 			'config' => array(
 				'type' => 'input',
 				'eval' => 'datetime',
@@ -92,6 +92,13 @@ $TCA['tx_batchmailer_domain_model_mail'] = array(
 				'readOnly' => TRUE
 			),
 		),
+		'mail' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:batchmailer/Resources/Private/Language/locallang_db.xlf:tx_batchmailer_domain_model_mail.mail',
+			'config' => array(
+				'type' => 'none'
+			)
+		)
 	),
 );
 

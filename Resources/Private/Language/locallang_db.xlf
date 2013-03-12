@@ -29,9 +29,6 @@
 				<source>Body</source>
 			</trans-unit>
 			<trans-unit id="tx_batchmailer_domain_model_mail.mail">
-				<source>Mail</source>
-			</trans-unit>
-			<trans-unit id="tx_batchmailer_domain_model_mail.mail_object">
 				<source>Mail Object</source>
 			</trans-unit>
 

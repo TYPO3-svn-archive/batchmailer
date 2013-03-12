@@ -87,7 +87,7 @@ class Tx_Batchmailer_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * The unserialized mail object
 	 *
-	 * @var t3lib_mail_Message
+	 * @var Tx_Batchmailer_Utility_Message
 	 */
 	protected $mailObject;
 
@@ -222,13 +222,13 @@ class Tx_Batchmailer_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractE
 	 */
 	public function setMail($mail) {
 		$this->mail = $mail;
-		$this->setMailObject($mail);
+		$this->mailObject = unserialize($mail);
 	}
 
 	/**
 	 * Returns the mailObject
 	 *
-	 * @return t3lib_mail_Message $mailObject
+	 * @return Tx_Batchmailer_Utility_Message $mailObject
 	 */
 	public function getMailObject() {
 		return $this->mailObject;
@@ -237,11 +237,12 @@ class Tx_Batchmailer_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Sets the mailObject
 	 *
-	 * @param string $mailObject
+	 * @param Tx_Batchmailer_Utility_Message $mailObject
 	 * @return void
 	 */
 	public function setMailObject($mailObject) {
-		$this->mailObject = unserialize($mailObject);
+		$this->mailObject = $mailObject;
+		$this->mail = serialize($mailObject);
 	}
 
 }
