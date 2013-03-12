@@ -51,12 +51,19 @@ class Tx_Batchmailer_Service_Transport implements Swift_Transport {
 	 */
 	protected $persistenceManager;
 
+	/**
+	 * @var array
+	 */
+	protected $configuration = array();
+
 	public function __construct($settings) {
 		// Initialize objects manually, as the full Extbase context is not loaded and we cannot rely
 		// on dependency injection at this point
 		$this->mailRepository = t3lib_div::makeInstance('Tx_Batchmailer_Domain_Repository_MailRepository');
 		$this->objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
 		$this->persistenceManager = t3lib_div::makeInstance('Tx_Extbase_Persistence_Manager');
+		// Read the extension's configuration
+		$this->configuration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['batchmailer']);
 	}
 
 	/**
@@ -102,8 +109,7 @@ class Tx_Batchmailer_Service_Transport implements Swift_Transport {
 		// Create the Mail object and set its values
 		/** @var $newMail Tx_Batchmailer_Domain_Model_Mail */
 		$newMail = $this->objectManager->create('Tx_Batchmailer_Domain_Model_Mail');
-		// TODO: this must be improved when mails are sent from another context (e.g. BE) or to enable some configuration override
-		$newMail->setPid($GLOBALS['TSFE']->id);
+		$newMail->setPid($this->getStoragePage());
 		$newMail->setSubject($message->getSubject());
 		$newMail->setBody($message->getBody());
 		$newMail->setRecipients(Tx_Batchmailer_Utility_Format::formatListOfNames($message->getTo()));
@@ -125,6 +131,21 @@ class Tx_Batchmailer_Service_Transport implements Swift_Transport {
 	 */
 	public function registerPlugin(Swift_Events_EventListener $plugin) {
 		// TODO: Implement registerPlugin() method.
+	}
+
+	/**
+	 * Defines the storage pid for mail objects
+	 *
+	 * @return int
+	 */
+	protected function getStoragePage() {
+		// Default is the configured storage pid (or 0)
+		$storagePid = (isset($this->configuration['storagePid'])) ? $this->configuration['storagePid'] : 0;
+		// In the FE context, use the current page, unless it should be overridden by the default storage pid
+		if (isset($GLOBALS['TSFE']) && empty($this->configuration['storagePidOverride'])) {
+			$storagePid = $GLOBALS['TSFE']->id;
+		}
+		return $storagePid;
 	}
 }
 ?>
