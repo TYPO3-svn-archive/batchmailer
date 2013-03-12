@@ -34,5 +34,16 @@
  */
 class Tx_Batchmailer_Domain_Repository_MailRepository extends Tx_Extbase_Persistence_Repository {
 
+	/**
+	 * Performs initialization for the repository object
+	 */
+	public function initializeObject() {
+		/** @var $querySettings Tx_Extbase_Persistence_Typo3QuerySettings */
+		$querySettings = $this->objectManager->create('Tx_Extbase_Persistence_Typo3QuerySettings');
+		// Tell the repository to ignore the storage pid condition (will get all records, wherever they are)
+		$querySettings->setRespectStoragePage(FALSE);
+		$this->setDefaultQuerySettings($querySettings);
+	}
+
 }
 ?>
