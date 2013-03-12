@@ -35,6 +35,7 @@
  * @package batchmailer
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
+ * $Id$
  */
 class Tx_Batchmailer_Utility_Message extends t3lib_mail_Message {
 }

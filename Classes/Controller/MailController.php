@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2013 François Suter <typo3@cobweb.ch>, Cobweb Development Sarl
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -30,6 +30,7 @@
  * @package batchmailer
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
+ * $Id$
  */
 class Tx_Batchmailer_Controller_MailController extends Tx_Extbase_MVC_Controller_ActionController {
 

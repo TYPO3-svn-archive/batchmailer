@@ -25,11 +25,12 @@
  ***************************************************************/
 
 /**
- *
+ * Model for the Mail object
  *
  * @package batchmailer
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
+ * $Id$
  */
 class Tx_Batchmailer_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractEntity {
 
