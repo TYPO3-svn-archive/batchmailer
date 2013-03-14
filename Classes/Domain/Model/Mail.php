@@ -100,7 +100,7 @@ class Tx_Batchmailer_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractE
 	protected $sent;
 
 	/**
-	 * Result status of the mail (OK = 6, error = 3)
+	 * Result status of the mail (OK = 6, warning = 4, error = 3)
 	 *
 	 * NOTE: the values correspond to \TYPO3\CMS\Core\Log\LogLevel::INFO and \TYPO3\CMS\Core\Log\LogLevel::ERROR
 	 * respectively, taken from TYPO3 CMS 6.0
@@ -307,7 +307,7 @@ class Tx_Batchmailer_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractE
 	}
 
 	/**
-	 * Sets the sent status (OK = 6, error = 3)
+	 * Sets the sent status (OK = 6, warning = 4, error = 3)
 	 *
 	 * @param integer $sentStatus
 	 * @return void
