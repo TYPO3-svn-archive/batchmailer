@@ -15,7 +15,7 @@ CREATE TABLE tx_batchmailer_domain_model_mail (
 	mail blob,
 
 	sent tinyint(4) unsigned DEFAULT '0' NOT NULL,
-	sent_status tinyint(4) unsigned DEFAULT '6' NOT NULL,
+	sent_status tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	sent_error_message text,
 	sent_date int(11) unsigned DEFAULT '0' NOT NULL,
 
