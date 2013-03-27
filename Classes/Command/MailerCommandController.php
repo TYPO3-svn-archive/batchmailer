@@ -33,7 +33,7 @@
  *
  * $Id$
  */
-class Tx_Batchmailer_Command_SendCommandController extends Tx_Extbase_MVC_Controller_CommandController {
+class Tx_Batchmailer_Command_MailerCommandController extends Tx_Extbase_MVC_Controller_CommandController {
 	/**
 	 * @var Tx_Batchmailer_Domain_Repository_MailRepository
 	 * @inject
