@@ -12,7 +12,7 @@ CREATE TABLE tx_batchmailer_domain_model_mail (
 	sender varchar(255) DEFAULT '' NOT NULL,
 	subject varchar(255) DEFAULT '' NOT NULL,
 	body text NOT NULL,
-	mail blob,
+	mail mediumblob,
 
 	sent tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	sent_status tinyint(4) unsigned DEFAULT '0' NOT NULL,
