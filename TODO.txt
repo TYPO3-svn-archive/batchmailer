@@ -1,0 +1,2 @@
+* add Scheduler task for cleaning up attachments
+* find a way to remove existing attachments before saving the mail object

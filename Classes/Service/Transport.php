@@ -117,6 +117,8 @@ class Tx_Batchmailer_Service_Transport implements Swift_Transport {
 		$newMail->setCopies(Tx_Batchmailer_Utility_Format::formatListOfNames($message->getCc()));
 		$newMail->setBlindCopies(Tx_Batchmailer_Utility_Format::formatListOfNames($message->getBcc()));
 		$newMail->setMailObject($message);
+		// Take care of attachments
+		$this->saveAttachments($message, $newMail);
 		// Add to the repository and persist
 		$this->mailRepository->add($newMail);
 		$this->persistenceManager->persistAll();
@@ -146,6 +148,42 @@ class Tx_Batchmailer_Service_Transport implements Swift_Transport {
 			$storagePid = $GLOBALS['TSFE']->id;
 		}
 		return $storagePid;
+	}
+
+	/**
+	 * Gathers all attachments from the message and stores them for later use
+	 *
+	 * This is necessary because attachments will generally be stored as temporary files,
+	 * which will not exist anymore when the Scheduler task will attempt to send the original
+	 * messages. Thus we store the attachments here and restore them upon sending.
+	 *
+	 * @param t3lib_mail_Message $message The current message
+	 * @param Tx_Batchmailer_Domain_Model_Mail $mail The mail object for storage
+	 * @return void
+	 */
+	protected function saveAttachments(t3lib_mail_Message $message, Tx_Batchmailer_Domain_Model_Mail $mail) {
+		$attachments = array();
+		// Loop on all children (if any)
+		$children = $message->getChildren();
+		foreach ($children as $aChild) {
+			// If child is an attachment, read its content and store it in a specific location
+			if ($aChild instanceof Swift_Mime_Attachment) {
+				$temporaryFilename = PATH_site . 'uploads/tx_batchmailer/' . uniqid() . '-' . $aChild->getFilename();
+				$fp = fopen($temporaryFilename, 'w');
+				if ($fp) {
+					fwrite($fp, $aChild->getBody());
+					fclose($fp);
+				}
+				// TODO: report write errors somewhere
+				$attachments[] = $temporaryFilename;
+			}
+		}
+		// Add all attachment references as a comma-separated list of file names
+		if (count($attachments) > 0) {
+			$mail->setAttachments(
+				implode(',', $attachments)
+			);
+		}
 	}
 }
 ?>

@@ -73,7 +73,15 @@ class Tx_Batchmailer_Command_MailerCommandController extends Tx_Extbase_MVC_Cont
 		foreach ($mailsToSend as $aMail) {
 			try {
 				// It seems that the mail object is not automatically unserialized, do it "manually" here
+				/** @var $mailObject Tx_Batchmailer_Utility_Message */
 				$mailObject = unserialize($aMail->getMail());
+				// Restore the attachments
+				$attachments = explode(',', $aMail->getAttachments());
+				foreach ($attachments as $aFile) {
+					$mailObject->attach(
+						Swift_Attachment::fromPath($aFile)->setFilename(basename($aFile))
+					);
+				}
 				$result = $mailObject->send();
 				$failedRecipients = $mailObject->getFailedRecipients();
 				// Mark the mail as sent

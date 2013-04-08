@@ -86,6 +86,13 @@ class Tx_Batchmailer_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractE
 	protected $mail;
 
 	/**
+	 * Comma-separated list of file names, corresponding to the mail's attachments
+	 *
+	 * @var string
+	 */
+	protected $attachments;
+
+	/**
 	 * The unserialized mail object
 	 *
 	 * @var Tx_Batchmailer_Utility_Message
@@ -352,6 +359,24 @@ class Tx_Batchmailer_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractE
 	 */
 	public function setSentDate(DateTime $sentDate) {
 		$this->sentDate = $sentDate;
+	}
+
+	/**
+	 * Sets the list of attachments
+	 *
+	 * @param string $attachments
+	 */
+	public function setAttachments($attachments) {
+		$this->attachments = $attachments;
+	}
+
+	/**
+	 * Gets the list of attachments
+	 *
+	 * @return string
+	 */
+	public function getAttachments() {
+		return $this->attachments;
 	}
 
 }

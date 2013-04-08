@@ -34,6 +34,9 @@
 			<trans-unit id="tx_batchmailer_domain_model_mail.body">
 				<source>Body</source>
 			</trans-unit>
+			<trans-unit id="tx_batchmailer_domain_model_mail.attachments">
+				<source>Attachments</source>
+			</trans-unit>
 			<trans-unit id="tx_batchmailer_domain_model_mail.mail">
 				<source>Mail Object</source>
 			</trans-unit>
