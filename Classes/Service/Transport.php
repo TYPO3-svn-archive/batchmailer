@@ -116,9 +116,10 @@ class Tx_Batchmailer_Service_Transport implements Swift_Transport {
 		$newMail->setSender(Tx_Batchmailer_Utility_Format::formatListOfNames($message->getFrom()));
 		$newMail->setCopies(Tx_Batchmailer_Utility_Format::formatListOfNames($message->getCc()));
 		$newMail->setBlindCopies(Tx_Batchmailer_Utility_Format::formatListOfNames($message->getBcc()));
-		$newMail->setMailObject($message);
 		// Take care of attachments
 		$this->saveAttachments($message, $newMail);
+		// Add the object itself
+		$newMail->setMailObject($message);
 		// Add to the repository and persist
 		$this->mailRepository->add($newMail);
 		$this->persistenceManager->persistAll();
@@ -176,6 +177,8 @@ class Tx_Batchmailer_Service_Transport implements Swift_Transport {
 				}
 				// TODO: report write errors somewhere
 				$attachments[] = $temporaryFilename;
+				// Delete the current attachment
+				$message->detach($aChild);
 			}
 		}
 		// Add all attachment references as a comma-separated list of file names
