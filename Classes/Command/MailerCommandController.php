@@ -69,8 +69,13 @@ class Tx_Batchmailer_Command_MailerCommandController extends Tx_Extbase_MVC_Cont
 		/** @var $mailsToSend Tx_Extbase_Persistence_QueryResultInterface */
 		$mailsToSend = $this->mailRepository->findBySent(FALSE);
 
+		// Numbers for reporting
+		$mailsHandled = 0;
+		$mailsSentSuccessfully = 0;
+
 		/** @var $aMail Tx_Batchmailer_Domain_Model_Mail */
 		foreach ($mailsToSend as $aMail) {
+			$mailsHandled++;
 			try {
 				// It seems that the mail object is not automatically unserialized, do it "manually" here
 				/** @var $mailObject Tx_Batchmailer_Utility_Message */
@@ -97,6 +102,7 @@ class Tx_Batchmailer_Command_MailerCommandController extends Tx_Extbase_MVC_Cont
 					// mark it as a success
 					if (count($failedRecipients) == 0) {
 						$aMail->setSentStatus(6);
+						$mailsSentSuccessfully++;
 
 					// Otherwise set status to warning and issue list of failed recipients
 					} else {
@@ -114,6 +120,13 @@ class Tx_Batchmailer_Command_MailerCommandController extends Tx_Extbase_MVC_Cont
 			$this->mailRepository->update($aMail);
 		}
 		$this->persistenceManager->persistAll();
+
+		// Report about the execution
+		if ($mailsHandled == 0) {
+			$this->outputLine('No mails to handle');
+		} else {
+			$this->outputLine(sprintf('%d mails were handled, %d sent successfully.', $mailsHandled, $mailsSentSuccessfully));
+		}
 	}
 }
 ?>
