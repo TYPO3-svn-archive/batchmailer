@@ -132,6 +132,13 @@ class Tx_Batchmailer_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractE
 	protected $sentDate;
 
 	/**
+	 * Number of times the mailer has tried to send this mail
+	 *
+	 * @var integer
+	 */
+	protected $sentTries;
+
+	/**
 	 * Returns the recipients
 	 *
 	 * @return string $recipients
@@ -377,6 +384,22 @@ class Tx_Batchmailer_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractE
 	 */
 	public function getAttachments() {
 		return $this->attachments;
+	}
+
+	/**
+	 * @param int $sentTries
+	 */
+	public function setSentTries($sentTries)
+	{
+		$this->sentTries = $sentTries;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getSentTries()
+	{
+		return $this->sentTries;
 	}
 
 }

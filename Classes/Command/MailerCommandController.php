@@ -117,6 +117,8 @@ class Tx_Batchmailer_Command_MailerCommandController extends Tx_Extbase_MVC_Cont
 				$aMail->setSentStatus(3);
 				$aMail->setSentErrorMessage($e->getMessage() . ' (' . $e->getCode() . ')');
 			}
+			// Whatever the result, raise number of tries
+			$aMail->setSentTries($aMail->getSentTries() + 1);
 			$this->mailRepository->update($aMail);
 		}
 		$this->persistenceManager->persistAll();

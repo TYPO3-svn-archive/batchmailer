@@ -52,6 +52,9 @@
 			<trans-unit id="tx_batchmailer_domain_model_mail.sent_date">
 				<source>Sent on</source>
 			</trans-unit>
+			<trans-unit id="tx_batchmailer_domain_model_mail.sent_tries">
+				<source>Number of tries</source>
+			</trans-unit>
 
 		</body>
 	</file>

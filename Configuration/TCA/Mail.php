@@ -9,7 +9,7 @@ $TCA['tx_batchmailer_domain_model_mail'] = array(
 		'showRecordFieldList' => 'hidden, recipients, copies, blind_copies, sender, subject, body',
 	),
 	'types' => array(
-		'1' => array('showitem' => '--div--;LLL:EXT:batchmailer/Resources/Private/Language/locallang_db.xlf:tx_batchmailer_domain_model_mail.tab_mail, crdate, hidden, recipients, copies, blind_copies, sender, subject, body, attachments, --div--;LLL:EXT:batchmailer/Resources/Private/Language/locallang_db.xlf:tx_batchmailer_domain_model_mail.tab_sent, sent, sent_status, sent_error_message, sent_date'),
+		'1' => array('showitem' => '--div--;LLL:EXT:batchmailer/Resources/Private/Language/locallang_db.xlf:tx_batchmailer_domain_model_mail.tab_mail, crdate, hidden, recipients, copies, blind_copies, sender, subject, body, attachments, --div--;LLL:EXT:batchmailer/Resources/Private/Language/locallang_db.xlf:tx_batchmailer_domain_model_mail.tab_sent, sent, sent_status, sent_error_message, sent_date, sent_tries'),
 	),
 	'columns' => array(
 		'crdate' => array(
@@ -138,6 +138,16 @@ $TCA['tx_batchmailer_domain_model_mail'] = array(
 			'config' => array(
 				'type' => 'input',
 				'eval' => 'datetime',
+				'readOnly' => TRUE
+			),
+		),
+		'sent_tries' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:batchmailer/Resources/Private/Language/locallang_db.xlf:tx_batchmailer_domain_model_mail.sent_tries',
+			'config' => array(
+				'type' => 'input',
+				'eval' => 'int',
+				'size' => 5,
 				'readOnly' => TRUE
 			),
 		),
