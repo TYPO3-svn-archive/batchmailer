@@ -81,11 +81,14 @@ class Tx_Batchmailer_Command_MailerCommandController extends Tx_Extbase_MVC_Cont
 				/** @var $mailObject Tx_Batchmailer_Utility_Message */
 				$mailObject = unserialize($aMail->getMail());
 				// Restore the attachments
-				$attachments = explode(',', $aMail->getAttachments());
-				foreach ($attachments as $aFile) {
-					$mailObject->attach(
-						Swift_Attachment::fromPath($aFile)->setFilename(basename($aFile))
-					);
+				$attachmentsList = $aMail->getAttachments();
+				if (!empty($attachmentsList)) {
+					$attachments = explode(',', $attachmentsList);
+					foreach ($attachments as $aFile) {
+						$mailObject->attach(
+							Swift_Attachment::fromPath($aFile)->setFilename(basename($aFile))
+						);
+					}
 				}
 				$result = $mailObject->send();
 				$failedRecipients = $mailObject->getFailedRecipients();
@@ -102,6 +105,8 @@ class Tx_Batchmailer_Command_MailerCommandController extends Tx_Extbase_MVC_Cont
 					// mark it as a success
 					if (count($failedRecipients) == 0) {
 						$aMail->setSentStatus(6);
+						// Make sure no error message from a previous try is left over
+						$aMail->setSentErrorMessage('');
 						$mailsSentSuccessfully++;
 
 					// Otherwise set status to warning and issue list of failed recipients
