@@ -118,7 +118,26 @@ $TCA['tx_batchmailer_domain_model_mail'] = array(
 			'label' => 'LLL:EXT:batchmailer/Resources/Private/Language/locallang_db.xlf:tx_batchmailer_domain_model_mail.sent_status',
 			'config' => array(
 				'type' => 'input',
+				'form_type' => 'select',
 				'eval' => 'int',
+				'items' => array(
+					array(
+						'LLL:EXT:batchmailer/Resources/Private/Language/locallang_db.xlf:tx_batchmailer_domain_model_mail.sent_status.not_sent',
+						0
+					),
+					array(
+						'LLL:EXT:batchmailer/Resources/Private/Language/locallang_db.xlf:tx_batchmailer_domain_model_mail.sent_status.warning',
+						3
+					),
+					array(
+						'LLL:EXT:batchmailer/Resources/Private/Language/locallang_db.xlf:tx_batchmailer_domain_model_mail.sent_status.error',
+						4
+					),
+					array(
+						'LLL:EXT:batchmailer/Resources/Private/Language/locallang_db.xlf:tx_batchmailer_domain_model_mail.sent_status.ok',
+						6
+					),
+				),
 				'readOnly' => TRUE
 			),
 		),

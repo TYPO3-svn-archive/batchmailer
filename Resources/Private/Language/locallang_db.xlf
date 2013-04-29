@@ -46,6 +46,18 @@
 			<trans-unit id="tx_batchmailer_domain_model_mail.sent_status">
 				<source>Status</source>
 			</trans-unit>
+			<trans-unit id="tx_batchmailer_domain_model_mail.sent_status.not_sent">
+				<source>Not sent</source>
+			</trans-unit>
+			<trans-unit id="tx_batchmailer_domain_model_mail.sent_status.warning">
+				<source>Warning</source>
+			</trans-unit>
+			<trans-unit id="tx_batchmailer_domain_model_mail.sent_status.error">
+				<source>Error</source>
+			</trans-unit>
+			<trans-unit id="tx_batchmailer_domain_model_mail.sent_status.ok">
+				<source>OK</source>
+			</trans-unit>
 			<trans-unit id="tx_batchmailer_domain_model_mail.sent_error_message">
 				<source>Error message</source>
 			</trans-unit>
